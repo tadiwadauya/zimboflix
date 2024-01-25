@@ -45,7 +45,14 @@
                                                     <a href="#">{{ $item->category->name }}</a>
                                                 </li>
                                                 <li class="release-time">
-                                                    <span><i class="far fa-calendar-alt"></i> {{ $item->release_date->format('Y') }}</span>
+                                                <span>
+    <i class="far fa-calendar-alt"></i>
+    @if ($item->release_date)
+        {{ $item->release_date->format('Y') }}
+    @else
+        Unknown
+    @endif
+</span>
                                                      </li>
                                             </ul>
                                         </div>

@@ -73,7 +73,18 @@ $(document).ready(function() {
     });
 });
 </script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#has_parent').change(function() {
+            if ($(this).is(':checked')) {
+                $('#parent_production').show();
+            } else {
+                $('#parent_production').hide();
+            }
+        });
+    });
+</script>
 <script>
     function handleFileChange(event) {
         const fileInput = event.target;
@@ -99,6 +110,7 @@ $(document).ready(function() {
         }
     }
 </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="{{asset('assets/admin/assets/js/bundle.js')}}"></script>
     <script src="{{asset('assets/admin/assets/js/scripts.js')}}"></script>

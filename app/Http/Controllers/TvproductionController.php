@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Tvproduction;
 use App\Models\Category;
+use App\Models\Movietype;
 
 class TvproductionController extends Controller
 {
@@ -20,8 +21,10 @@ class TvproductionController extends Controller
 
     public function create()
     {
+        $parentProductions = Tvproduction::all();
+        $types = Movietype::latest()->get();
         $categories = Category::latest()->get();
-        return view('tvproductions.create', compact('categories'));
+        return view('tvproductions.create', compact('categories','types','parentProductions'));
     }
 
 
@@ -110,9 +113,10 @@ class TvproductionController extends Controller
     
     public function edit($id)
     {
+        $types = Movietype::latest()->get();
         $categories = Category::latest()->get();
         $tvproduction = Tvproduction::findOrFail($id);
-        return view('tvproductions.edit',compact('tvproduction','categories'));
+        return view('tvproductions.edit',compact('tvproduction','categories','types'));
     }
 
     /**

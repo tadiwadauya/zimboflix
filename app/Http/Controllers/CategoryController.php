@@ -30,6 +30,6 @@ class CategoryController extends Controller
         $category->name = $validatedData['name'];
         $category->save();
 
-        return redirect('/')->with('success', 'Category created successfully!');
+        return redirect('categories')->with('success', 'Category created successfully!');
     }
 }

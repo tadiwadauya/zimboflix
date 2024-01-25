@@ -76,7 +76,35 @@
 </div>
 </div>
     
+<div class="col-sm-9">
+    <div class="form-group">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="has_parent" name="has_parent" value="1">
+            <label class="form-check-label" for="has_parent">
+                Has Parent Production
+            </label>
+        </div>
+    </div>
+</div>
 
+<div class="col-sm-9" id="parent_production" style="display: none;">
+    <div class="form-group">
+        <label class="form-label" for="parent_id">Parent Production:</label>
+        <div class="form-control-wrap">
+            <select class="form-select js-select2" data-search="on" id="parent_id" name="parent_id">
+                <option value="">Select a parent production</option>
+                @foreach ($parentProductions as $parentProduction)
+                    <option value="{{ $parentProduction->id }}">{{ $parentProduction->title }}</option>
+                @endforeach
+            </select>
+        </div>
+        @if ($errors->has('parent_id'))
+            <span class="help-block">
+                <strong>{{ $errors->first('parent_id') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
 <div class="col-sm-9">
     <div class="form-group">
         <label class="form-label" for="default-01" for="cover_photo">Cover Photo</label>
@@ -150,7 +178,11 @@
     <div class="form-group">
     <label class="form-label" for="default-01" for="type">Type:</label>
     <div class="form-control-wrap">
-    <input type="text" name="type" class="form-control"  id="type" placeholder="Enter the type of the tvproduction">
+    <select name="type" class="form-control" id="type">
+    @foreach ($types as $type)
+        <option value="{{ $type->name }}">{{ $type->name }}</option>
+    @endforeach
+</select>
     @if ($errors->has('type'))
         <span class="help-block">
             <strong>{{ $errors->first('type') }}</strong>
@@ -503,4 +535,5 @@
 </div>
 </div>
 </div>
+
 @endsection

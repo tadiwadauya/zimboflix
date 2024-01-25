@@ -38,9 +38,9 @@
                                                 <ul class="nk-block-tools g-3">
 
                                                 <li>
-                                                    <a href="{{ url()->previous() }}" class="btn btn-white btn-dim btn-outline-primary">
-                                                    <em class="icon ni ni-chevron-left-round-fill"></em>
-                                                        <span>back</span>
+                                                    <a href=" {{url('/tvproductions/create')}}" class="btn btn-white btn-dim btn-outline-primary">
+                                                    <em class="icon ni ni-plus"></em>
+                                                        <span>Add</span>
                                                     </a>
                                                 </li>
                                                     <li><a href="{{ url('/admin/home')}}" class="btn btn-white btn-dim btn-outline-primary"><em class="icon ni ni-home"></em><span>Home</span></a></li>
