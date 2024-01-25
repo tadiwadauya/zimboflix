@@ -35,7 +35,7 @@ Route::post('/categories', 'App\Http\Controllers\CategoryController@store')->nam
 
 Route::post('/movietypes', 'App\Http\Controllers\MovietypeController@store');
 Route::get('/movietypes/create', 'App\Http\Controllers\MovietypeController@create')->name('movietypes.create');
-Route::get('/movietypes', 'App\Http\Controllers\MovietypeController@index')->name('index');
+Route::get('/movietypes', 'App\Http\Controllers\MovietypeController@movietypes')->name('movietypes');
 Route::post('/movietypes', 'App\Http\Controllers\MovietypeController@store')->name('movietypes.store');
 
 

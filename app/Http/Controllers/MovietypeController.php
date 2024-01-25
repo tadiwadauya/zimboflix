@@ -8,11 +8,12 @@ use App\Models\Movietype;
 
 class MovietypeController extends Controller
 {
-    public function index()
+    public function movietypes()
     {
         $movietypes = Movietype::all();
     return view('movietypes.index', compact('movietypes'));
     }
+
     public function create()
 {
     $movietype = new Movietype;
@@ -30,6 +31,6 @@ class MovietypeController extends Controller
         $movietype->name = $validatedData['name'];
         $movietype->save();
 
-        return redirect('/')->with('success', 'movietype created successfully!');
+        return redirect('movietypes')->with('success', 'movietype created successfully!');
     }
 }
