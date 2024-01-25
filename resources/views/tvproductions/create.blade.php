@@ -12,7 +12,11 @@
 @endif
 <div class="nk-content nk-content-fluid">
 <div class="card card-bordered card-preview">
-    
+@if (session()->has('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
                                         <div class="card-inner">
                                             <div class="preview-block">
                                             <div class="nk-content-body">
