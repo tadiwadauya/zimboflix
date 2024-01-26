@@ -28,6 +28,9 @@ return new class extends Migration
         $table->string('production_company')->nullable();
         $table->string('cast')->nullable();
         $table->unsignedBigInteger('category_id')->nullable();
+        $table->string('subtitle')->nullable();
+        $table->string('season')->nullable();
+        $table->string('episode')->nullable();
         $table->unsignedBigInteger('parent_id')->nullable();
         $table->timestamps();
 

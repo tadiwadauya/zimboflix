@@ -72,10 +72,11 @@
                                     <th>ID</th>
                                     <th>Cover Photo</th>
                                     <th>Title</th>
+                                    <th>Season</th>
+                                    <th>Episode</th>
                                     <th>Category</th>
                                     <th>Views</th>
                                     <th>Downloads</th>
-                                    <th>Date Uploaded</th>
                                     <th class="no-search no-sort notexport">Actions</th>
                                     <th class="no-search no-sort notexport"></th>
                                     <th class="no-search no-sort notexport"></th>
@@ -87,10 +88,11 @@
                                         <td>{{ $item->id}}</td>
                                         <td><img src="{{ asset('cover_photos/' . $item->cover_photo) }}" alt="Cover Image" width="100"></td>
                                         <td>{{ $item->title}}</td>
+                                        <td>{{ $item->season }}</td>
+                                        <td>{{ $item->episode }}</td>
                                         <td>{{ $item->category->name }}</td>
                                         <td>{{ $item->views}}</td>
                                         <td>{{ $item->downloads}}</td>
-                                        <td>{{ $item->created_at}}</td>
                                       
                                         <td>
                                             <a class="btn btn-sm btn-success btn-block" href="{{ URL::to('tvproductions/' . $item->id) }}" data-toggle="tooltip" title="Show">

@@ -104,6 +104,19 @@
             </span>
         @endif
     </div>
+    <div class="col-sm-9">
+    <div class="form-group">
+    <label class="form-label" for="default-01" for="subtitle">Title:</label>
+    <div class="form-control-wrap">
+    <input type="text" class="form-control" id="default-01" name="subtitle" id="subtitle" placeholder="Enter the subtitle of the tvproduction">
+</div>
+    @if ($errors->has('subtitle'))
+        <span class="help-block">
+            <strong>{{ $errors->first('subtitle') }}</strong>
+        </span>
+    @endif
+</div>
+</div>
 </div>
 <div class="col-sm-9">
     <div class="form-group">
@@ -498,20 +511,45 @@
 </div>
 
 <div class="col-sm-9">
-    <div class="form-group" >
-    <label class="form-label" for="default-01" for="category_id">Category:</label>
-    <div class="form-control-wrap">
-<select name="category_id" class="form-control" id="category_id">
-    @foreach ($categories as $category)
-        <option value="{{ $category->id }}">{{ $category->name }}</option>
-    @endforeach
-</select>
-@if ($errors->has('category_id'))
-    <span class="help-block">
-        <strong>{{ $errors->first('category_id') }}</strong>
-    </span>
-@endif
+    <div class="form-group">
+        <label class="form-label" for="default-01" for="category_id">Category:</label>
+        <div class="form-control-wrap">
+            <select name="category_id" class="form-control" id="category_id">
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+            @if ($errors->has('category_id'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('category_id') }}</strong>
+                </span>
+            @endif
+        </div>
     </div>
+</div>
+
+<div class="col-sm-9" id="season_input" style="display: none;">
+    <div class="form-group">
+        <label class="form-label" for="season">Season:</label>
+        <div class="form-control-wrap">
+            <input type="text" name="season" class="form-control" id="season">
+        </div>
+        @if ($errors->has('season'))
+            <span class="help-block">
+                <strong>{{ $errors->first('season') }}</strong>
+            </span>
+        @endif
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="episode">Episode:</label>
+        <div class="form-control-wrap">
+            <input type="text" name="episode" class="form-control" id="episode">
+        </div>
+        @if ($errors->has('episode'))
+            <span class="help-block">
+                <strong>{{ $errors->first('episode') }}</strong>
+            </span>
+        @endif
     </div>
 </div>
     

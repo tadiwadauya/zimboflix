@@ -41,7 +41,6 @@
     </div>
     </div>
 
-
     <script>
 $(document).ready(function() {
     $('#countries').select2({
@@ -74,6 +73,7 @@ $(document).ready(function() {
 });
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#has_parent').change(function() {
@@ -81,6 +81,18 @@ $(document).ready(function() {
                 $('#parent_production').show();
             } else {
                 $('#parent_production').hide();
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#category_id').change(function() {
+            var selectedCategory = $(this).val();
+            if (selectedCategory == 2) { // Replace 2 with the ID of the "TV show" category
+                $('#season_input').show();
+            } else {
+                $('#season_input').hide();
             }
         });
     });

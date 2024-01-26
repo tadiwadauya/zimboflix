@@ -23,7 +23,9 @@ class Tvproduction extends Model
                             'director',
                             'production_company',
                             'cast',
-                            'category_id'
+                            'category_id',
+                            'parent_id',
+                            'subtitle'
                         ];
     
     public function category()

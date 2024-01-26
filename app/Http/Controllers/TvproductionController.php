@@ -50,6 +50,11 @@ class TvproductionController extends Controller
             'production_company' => 'nullable',
             'cast' => 'nullable',
             'category_id' => 'required',
+            'parent_id' => 'nullable',
+            'subtitle' => 'nullable',
+            'season' => 'nullable',
+            'episode' => 'nullable',
+
 
         ]);
 
@@ -86,6 +91,10 @@ class TvproductionController extends Controller
             $data->production_company=$request->production_company;
             $data->cast=$request->cast;
             $data->category_id=$request->category_id;
+            $data->parent_id=$request->parent_id;
+            $data->subtitle=$request->subtitle;
+            $data->season=$request->season;
+            $data->episode=$request->episode;
             
            
         
@@ -105,6 +114,13 @@ class TvproductionController extends Controller
         $data = Tvproduction::findOrFail($id);
         return view('tvproductions.showtv', compact('data'));
     }
+
+    public function watchvideo($id){
+
+        $data = Tvproduction::findOrFail($id);
+        return view('tvproductions.watchvideo', compact('data'));
+    }
+
     public function showTvproduction($id)
     {
         $data = Tvproduction::findOrFail($id);

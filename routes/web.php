@@ -50,6 +50,7 @@ Route::get('tvproductions/', 'App\Http\Controllers\TvproductionController@index'
 Route::get('show-tvproductions/', 'App\Http\Controllers\TvproductionController@showtvproductions');
 Route::get('tvproductions/{id}', 'App\Http\Controllers\TvproductionController@show');
 Route::get('tvproduction/{id}', 'App\Http\Controllers\TvproductionController@showtv');
+Route::get('tv/{id}', 'App\Http\Controllers\TvproductionController@watchvideo');
 Route::get('tvproductions/{id}/edit', 'App\Http\Controllers\TvproductionController@edit');
 Route::put('tvproductions/{id}', 'App\Http\Controllers\TvproductionController@update')->name('tvproductions.update');
 Route::delete('/tvproductions/{id}', 'App\Http\Controllers\TvproductionController@destroy')->name('tvproductions.destroy');
