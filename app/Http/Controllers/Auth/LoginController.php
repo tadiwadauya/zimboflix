@@ -38,8 +38,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    
     public function login(Request $request)
-    {   
+    {
         $input = $request->all();
     
         $this->validate($request, [
@@ -47,7 +49,9 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
     
-        if (auth()->attempt(array('phonenumber' => $input['phonenumber'], 'password' => $input['password']))) {
+        $remember = $request->has('remember'); // Add this line to capture the "Remember Me" checkbox value
+    
+        if (auth()->attempt(array('phonenumber' => $input['phonenumber'], 'password' => $input['password']), $remember)) {
             $user = auth()->user();
     
             if ($user->is_admin == 1) {

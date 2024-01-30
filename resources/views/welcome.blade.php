@@ -83,10 +83,10 @@
                             <div class="ucm-nav-wrap">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="tvShow-tab" data-toggle="tab" href="#tvShow" role="tab" aria-controls="tvShow" aria-selected="true">TV Shows</a>
+                                        <a class="nav-link active" id="tvShow-tab" data-toggle="tab" href="#tvShow" role="tab" aria-controls="tvShow" aria-selected="true">Movies</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="movies-tab" data-toggle="tab" href="#movies" role="tab" aria-controls="movies" aria-selected="false">Movies</a>
+                                        <a class="nav-link" id="movies-tab" data-toggle="tab" href="#movies" role="tab" aria-controls="movies" aria-selected="false">TV Shows</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="skits-tab" data-toggle="tab" href="#skits" role="tab" aria-controls="skits" aria-selected="false">Skits</a>
@@ -97,12 +97,12 @@
                     </div>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="tvShow" role="tabpanel" aria-labelledby="tvShow-tab">
+                            <div class="ucm-active-two owl-carousel">
                         @foreach ($all_tvproductions as $item)
                             @if ($item->category->name == 'Movie')
-                            <div class="ucm-active-two owl-carousel">
                                 <div class="movie-item movie-item-two mb-30">
                                     <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
+                                    <a href="{{ URL::to('tvproduction/' . $item->id) }}"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
                                    </div>
                                     <div class="movie-content">
                                         <div class="rating">
@@ -112,7 +112,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </div>
-                                        <h5 class="title"><a href="movie-details.html"> <td>{{ $item->title}}</td></a></h5>
+                                        <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}"> <td>{{ $item->title}}</td></a></h5>
                                         <span class="rel">{{ $item->type}}</span>
                                         <div class="movie-content-bottom">
                                               <ul>
@@ -135,7 +135,7 @@
                             @if ($item->category->name == 'Tv Show')
                                 <div class="movie-item movie-item-two mb-30">
                                     <div class="movie-poster">
-                                        <a href="movie-details.html"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
+                                        <a href="{{ URL::to('tvproduction/' . $item->id) }}l"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="rating">
@@ -145,7 +145,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </div>
-                                        <h5 class="title"><a href="movie-details.html"> <td>{{ $item->title}}</td></a></h5>
+                                        <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}l"> <td>{{ $item->title}}</td></a></h5>
                                         <span class="rel">{{ $item->type}}</span>
                                         <div class="movie-content-bottom">
                                             <ul>
@@ -167,10 +167,10 @@
                         <div class="tab-pane fade" id="skits" role="tabpanel" aria-labelledby="skits-tab">
                             <div class="ucm-active-two owl-carousel">
                             @foreach ($all_tvproductions as $item)
-                            @if ($item->category->name == 'Skits')
+                            @if ($item->category->name == 'skits')
                                 <div class="movie-item movie-item-two mb-30">
                                     <div class="movie-poster">
-                                    <a href="movie-details.html"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
+                                    <a href="{{ URL::to('tvproduction/' . $item->id) }}"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
                                      </div>
                                     <div class="movie-content">
                                         <div class="rating">
@@ -180,7 +180,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </div>
-                                        <h5 class="title"><a href="movie-details.html"> <td>{{ $item->title}}</td></a></h5>
+                                        <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}"> <td>{{ $item->title}}</td></a></h5>
                                         <span class="rel">{{ $item->type}}</span>
                                         <div class="movie-content-bottom">
                                          <ul>
@@ -218,14 +218,15 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="section-title title-style-three text-center mb-70">
-                    <span class="sub-title">Latest TV Shows</span>
-                    <h2 class="title">Latest Online Shows Watch</h2>
+                    <span class="sub-title">Latest TV Shows and Skits</span>
+                    <h2 class="title">Latest Online Shows and Skits To Watch</h2>
                 </div>
             </div>
         </div>
         <div class="row movie-item-row">
-            @foreach ($all_tvproductions as $item)
-                @if ($item->category->name == 'Tv Show') 
+        @foreach ($all_tvproductions as $item)
+    @if (($item->category->name == 'Tv Show' && $item->parent_id == null) || $item->category->name == 'skits')
+      
                     <div class="custom-col-"> 
                         <div class="movie-item movie-item-two">
                             <div class="movie-poster">
@@ -243,7 +244,7 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h5 class="title"><a href="movie-details.html">{{ $item->title}}</a></h5>
+                                <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}l">{{ $item->title}}</a></h5>
                                 <span class="rel">{{ $item->type}}</span>
                                 <div class="movie-content-bottom">
                                     <ul>

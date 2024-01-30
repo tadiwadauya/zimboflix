@@ -112,25 +112,25 @@
                                         </div>
                                         
                                         <div class="card">
-                                        @if($data->category->name === 'tv series')
-                                            <div class="card-header" id="headingTwo">
-                                                <button class="btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    <span class="season">Season 1</span>
-                                                    <span class="video-count">5 Full Episodes</span>
-                                                </button>
-                                            </div>
-                                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                <div class="card-body">
-                                                    <ul>
-                                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><i class="fas fa-play"></i> Episode 1 - The World Is Purple</a> <span class="duration"><i class="far fa-clock"></i> 28 Min</span></li>
-                                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><i class="fas fa-play"></i> Episode 2 - Meaner Than Evil</a> <span class="duration"><i class="far fa-clock"></i> 28 Min</span></li>
-                                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><i class="fas fa-play"></i> Episode 3 - I Killed a Man Today</a> <span class="duration"><i class="far fa-clock"></i> 28 Min</span></li>
-                                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><i class="fas fa-play"></i> Episode 4 - Cowboys and Dreamers</a> <span class="duration"><i class="far fa-clock"></i> 28 Min</span></li>
-                                                        <li><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="popup-video"><i class="fas fa-play"></i> Episode 5 - Freight Trains and Monsters</a> <span class="duration"><i class="far fa-clock"></i> 28 Min</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        @endif
+                                        @foreach ($grouped_tvproductions as $season => $tvproductions)
+    <div class="card">
+        <div class="card-header" id="heading{{ $season }}">
+            <button class="btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ $season }}" aria-expanded="false" aria-controls="collapse{{ $season }}">
+                <span class="season">Season {{ $season }}</span>
+                <span class="video-count">{{ $tvproductions->count() }} Full Episodes</span>
+            </button>
+        </div>
+        <div id="collapse{{ $season }}" class="collapse" aria-labelledby="heading{{ $season }}" data-parent="#accordionExample">
+            <div class="card-body">
+                <ul>
+                @foreach ($tvproductions as $item)
+                    <li><a href="{{ URL::to('tvproduction/' . $item->id) }}" ><i class="fas fa-play"></i>{{ $item->subtitle}}</a> <span class="duration"><i>Episode:</i> {{ $item->episode}}</span></li>
+                @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+@endforeach
                                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                                 <div class="card-body">
                                                     <ul>

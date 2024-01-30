@@ -12,11 +12,22 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public function setRememberToken($value)
+    {
+        $this->attributes[$this->getRememberTokenName()] = $value ?: Str::random(60);
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+    
     protected $fillable = [
         'first_name',
         'phonenumber',
