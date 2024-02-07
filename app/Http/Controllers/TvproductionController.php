@@ -18,6 +18,15 @@ class TvproductionController extends Controller
         $all_tvproductions = Tvproduction::latest()->get();
         return view('tvproductions.index',compact('all_tvproductions'));
     }
+    public function movies()
+    {
+        $all_tvproductions = Tvproduction::whereHas('category', function($query) {
+                                             $query->where('name', '=', 'Movie');
+                                         })
+                                         ->paginate(16);
+                                         
+        return view('tvproductions.movies', compact('all_tvproductions'));
+    }
 
     public function create()
     {
@@ -54,53 +63,129 @@ class TvproductionController extends Controller
             'subtitle' => 'nullable',
             'season' => 'nullable',
             'episode' => 'nullable',
-
-
         ]);
-
-        if($validator->fails()){
+    
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        
-        $data=new Tvproduction;
-        if($request->file('file')){
-            $file=$request->file('file');
-            $filename=time().'.'.$file->getClientOriginalExtension();
+    
+        $data = new Tvproduction;
+        if ($request->file('file')) {
+            $file = $request->file('file');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
             $request->file->move('videos/', $filename);
-            
-            $data->file= $filename;
-
-            
+    
+            $data->file = $filename;
         }
-
+    
         if ($request->file('cover_photo')) {
             $coverPhoto = $request->file('cover_photo');
             $coverPhotoName = time() . '.' . $coverPhoto->getClientOriginalExtension();
             $coverPhoto->move('cover_photos/', $coverPhotoName);
             $data->cover_photo = $coverPhotoName;
         }
-
-            $data->title=$request->title;
-            $data->description=$request->description;
-            $data->views = $request->views ?? 0;
-            $data->downloads = $request->downloads ?? 0;
-            $data->type=$request->type;
-            $data->country=$request->country;
-            $data->release_date=$request->release_date;
-            $data->director=$request->director;
-            $data->production_company=$request->production_company;
-            $data->cast=$request->cast;
-            $data->category_id=$request->category_id;
-            $data->parent_id=$request->parent_id;
-            $data->subtitle=$request->subtitle;
-            $data->season=$request->season;
-            $data->episode=$request->episode;
-            
-           
-        
-            $data->save();
-            return back()->with('success', 'TV production has been saved successfully');  
+    
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->views = $request->views ?? 0;
+        $data->downloads = $request->downloads ?? 0;
+        $data->type = $request->type;
+        $data->country = $request->country;
+        $data->release_date = $request->release_date;
+        $data->director = $request->director;
+        $data->production_company = $request->production_company;
+        $data->cast = $request->cast;
+        $data->category_id = $request->category_id;
+        $data->parent_id = $request->parent_id;
+        $data->subtitle = $request->subtitle;
+        $data->season = $request->season;
+        $data->episode = $request->episode;
+    
+        $data->save();
+    
+        // Redirect to the second stage to upload the second file with the best quality
+        return redirect()->route('second_stage', ['id' => $data->id]);
     }
+
+    public function secondStage($id)
+{
+    $tvProduction = Tvproduction::findOrFail($id);
+
+    return view('tvproductions/second_stage', compact('tvProduction'));
+}
+
+public function saveSecondStage(Request $request, $id)
+{
+    $tvProduction = Tvproduction::findOrFail($id);
+
+    // Save the second file with the best quality
+    if ($request->file('second_file')) {
+        $secondFile = $request->file('second_file');
+        $secondFileName = time() . '_best_quality.' . $secondFile->getClientOriginalExtension();
+        $secondFile->move('videos/', $secondFileName);
+
+        $tvProduction->second_file = $secondFileName;
+        $tvProduction->save();
+
+        // Redirect to the third stage to upload the third file with the middle quality
+        return redirect()->route('third_stage', ['id' => $tvProduction->id]);
+    }
+
+    return back()->withErrors(['error' => 'Please upload a file.']);
+}
+
+public function thirdStage($id)
+{
+    $tvProduction = Tvproduction::findOrFail($id);
+
+    return view('tvproductions/third_stage', compact('tvProduction'));
+}
+
+public function saveThirdStage(Request $request, $id)
+{
+    $tvProduction = Tvproduction::findOrFail($id);
+
+    // Save the third file with the middle quality
+    if ($request->file('third_file')) {
+        $thirdFile = $request->file('third_file');
+        $thirdFileName = time() . '_middle_quality.' . $thirdFile->getClientOriginalExtension();
+        $thirdFile->move('videos/', $thirdFileName);
+
+        $tvProduction->third_file = $thirdFileName;
+        $tvProduction->save();
+
+        // Redirect to the fourth stage to upload the fourth file with the lowest quality
+        return redirect()->route('fourth_stage', ['id' => $tvProduction->id]);
+    }
+
+    return back()->withErrors(['error' => 'Please upload a file.']);
+}
+
+public function fourthStage($id)
+{
+    $tvProduction = Tvproduction::findOrFail($id);
+
+    return view('tvproductions/fourth_stage', compact('tvProduction'));
+}
+
+public function saveFourthStage(Request $request, $id)
+{
+    $tvProduction = Tvproduction::findOrFail($id);
+
+    // Save the fourth file with the lowest quality
+    if ($request->file('fourth_file')) {
+        $fourthFile = $request->file('fourth_file');
+        $fourthFileName = time() . '_lowest_quality.' . $fourthFile->getClientOriginalExtension();
+        $fourthFile->move('videos/', $fourthFileName);
+
+        $tvProduction->fourth_file = $fourthFileName;
+        $tvProduction->save();
+
+        return redirect('tvproductions')->with('success', 'TV production has been added successfully!');
+    }
+
+    return back()->withErrors(['error' => 'Please upload a file.']);
+}
 
     public function show($id)
     {
@@ -118,6 +203,7 @@ class TvproductionController extends Controller
         return view('tvproductions.showtv', compact('data','all_tvproductions','grouped_tvproductions'));
     }
 
+    
     public function watchvideo($id){
 
         $data = Tvproduction::findOrFail($id);

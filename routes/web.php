@@ -39,8 +39,9 @@ Route::get('/movietypes', 'App\Http\Controllers\MovietypeController@movietypes')
 Route::post('/movietypes', 'App\Http\Controllers\MovietypeController@store')->name('movietypes.store');
 
 
+//tvproduction routes
 
-
+Route::get('movielist', 'App\Http\Controllers\TvproductionController@movies')->name('movies');
 Route::get('my-tvproductions', 'App\Http\Controllers\TvproductionController@myTvproductions')->name('my.tvproductionS');
 Route::get('show-tvproductionS/', 'App\Http\Controllers\TvproductionController@showtvproductions');
 Route::get('show-all-tvproductions', 'App\Http\Controllers\TvproductionController@ShowingAllTvproductions');
@@ -55,3 +56,15 @@ Route::get('tvproductions/{id}/edit', 'App\Http\Controllers\TvproductionControll
 Route::put('tvproductions/{id}', 'App\Http\Controllers\TvproductionController@update')->name('tvproductions.update');
 Route::delete('/tvproductions/{id}', 'App\Http\Controllers\TvproductionController@destroy')->name('tvproductions.destroy');
 Route::get('/tvproductions/download/{file}', 'App\Http\Controllers\TvproductionController@download');
+
+Route::get('/tv-production/{id}/second-stage', 'App\Http\Controllers\TVProductionController@secondStage')->name('second_stage');
+Route::post('/tv-production/{id}/save-second-stage', 'App\Http\Controllers\TVProductionController@saveSecondStage')->name('save_second_stage');
+
+Route::get('/tv-production/{id}/third-stage', 'App\Http\Controllers\TVProductionController@thirdStage')->name('third_stage');
+Route::post('/tv-production/{id}/save-third-stage', 'App\Http\Controllers\TVProductionController@saveThirdStage')->name('save_third_stage');
+
+Route::get('/tv-production/{id}/fourth-stage', 'App\Http\Controllers\TVProductionController@fourthStage')->name('fourth_stage');
+Route::post('/tv-production/{id}/save-fourth-stage', 'App\Http\Controllers\TVProductionController@saveFourthStage')->name('save_fourth_stage');
+
+
+Route::get('/downloads', 'App\Http\Controllers\DownloadController@index')->name('downloads');

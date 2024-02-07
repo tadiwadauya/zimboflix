@@ -1,9 +1,8 @@
 
         <!-- preloader-end -->
-        @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
-
 
 @include('includes.navbar')
 
@@ -28,7 +27,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-6 order-0 order-lg-2">
                                     <div class="slider-img text-center text-lg-right" data-animation="fadeInRight" data-delay="1s">
-                                    <img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt="" style="width: 420px;">
+                                    <a href="{{ URL::to('tvproduction/' . $item->id) }}"> <img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt="" style="width: 420px;"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">

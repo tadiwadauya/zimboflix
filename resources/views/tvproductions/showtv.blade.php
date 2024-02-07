@@ -2,23 +2,64 @@
         <!-- preloader-end -->
         @extends('layouts.app')
 
-@section('content')
+        @section('content')
 
 
-@include('includes.navbar')
+        @include('includes.navbar')
         <!-- main-area -->
         <main>
-
-            <!-- movie-details-area -->
+            
             <section class="movie-details-area" data-background="{{asset('assets/front/img/bg/movie_details_bg.jpg')}}">
                 <div class="container">
-                <div class="movie-details-img">
-    <div class="video-wrapper">
+               
+
+<div id="720" class="tabcontent">
+<div class="video-wrapper">
         <video id="videoPlayer" controls>
-            <source src="{{ asset('videos/' . $data->file) }}" type="video/mp4">
+        <source src="{{ asset('videos/' . $data->file) }}" type="video/mp4" download>
             Your browser does not support the video tag.
         </video>
     </div>
+</div>
+
+<div id="480" class="tabcontent">
+<div class="video-wrapper">
+        <video id="videoPlayer" controls>
+            <source src="{{ asset('videos/' . $data->second_file) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+<br>
+<div id="360" class="tabcontent">
+<div class="video-wrapper">
+<video id="videoPlayer" controls>
+    @if($data->third_file)
+        <source src="{{ asset('videos/' . $data->third_file) }}" type="video/mp4">
+    @else
+        <p>no video available to play</p>
+    @endif
+    Your browser does not support the video tag.
+</video>
+
+    </div>
+</div>
+<br>
+<div id="240" class="tabcontent">
+<div class="video-wrapper">
+        <video id="videoPlayer" controls>
+            <source src="{{ asset('videos/' . $data->fourth_file) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+<div class="tr-movie-menu-active text-center">
+                <div class="tab">
+  <button class="tablinks" onclick="openCity(event, '720')" id="defaultOpen">720p HD</button>
+  <button class="tablinks" onclick="openCity(event, '480')">480p</button>
+  <button class="tablinks" onclick="openCity(event, '360')">360p</button>
+  <button class="tablinks" onclick="openCity(event, '240')">240p</button>
+</div>
 </div>
 <br>
                     <div class="row align-items-center position-relative">
@@ -49,15 +90,17 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <p>{{ $data->description}}</p>
-                                <div class="movie-details-prime">
+                                <p>{{ $data->description}}</p><br>
+                                <div >
                                     <ul>
-                                        <li class="share"><a href="#"><i class="fas fa-share-alt"></i> Share</a></li>
-                                        <li class="streaming">
-                                            <h6>Prime Video</h6>
-                                            <span>Streaming Channels</span>
-                                        </li>
-                                        <li class="watch"><a href="https://www.youtube.com/watch?v=R2gbPxeNk2E" class="btn popup-video"><i class="fas fa-play"></i> Watch Now</a></li>
+                                    <li><div class="user-balance-sub">Views: <span>{{ $data->views }} </span></div> </li>
+                                    <li><div class="user-balance-sub">Downloads: <span>{{ $data->downloads }} </span></div></li>
+                                    <li><div class="user-balance-sub"><span>type: {{ $data->type}}</span></div></li>
+                                    <li><div class="user-balance-sub"><span>Origin: {{ $data->country}}</span></div></li>
+                                    <li><div class="user-balance-sub"><span>Release Date: {{ $data->release_date}}</span></div></li>
+                                    <li><div class="user-balance-sub"><span>Director: {{ $data->director}}</span></div></li>
+                                    <li><div class="user-balance-sub"><span>Production_company: {{ $data->production_company}}</span></div></li>
+                                    <li><div class="user-balance-sub"><span>Cast: {{ $data->cast}}</span></div></li>
                                     </ul>
                                 </div>
                             </div>
@@ -97,14 +140,12 @@
                                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                                 <div class="card-body">
                                                 @if(Auth::check())
-                                                    <ul>
-                                                        <li><a href="{{ asset('videos/' . $data->file) }}" download><i class="fas fa-download"></i>Download Original</a><span class="duration"><i class="far fa-size"></i> 1 g</span></li>
-                                                        <li><a href="{{ asset('videos/' . $data->file) }}?size=360p" download><i class="fas fa-download"></i>Download 720p</a><span class="duration"><i class="far fa-size"></i> 750 mb</span></li>
-                                                        <li><a href="{{ asset('videos/' . $data->file) }}?size=480p" download><i class="fas fa-download"></i>Download 480p</a><span class="duration"><i class="far fa-size"></i> 450 mb</span></li>
-                                                        <li><a href="{{ asset('videos/' . $data->file) }}?size=720p" download><i class="fas fa-download"></i>Download 360p</a><span class="duration"><i class="far fa-size"></i> 280 mb</span></li>
-                                                        <li><a href="{{ asset('videos/' . $data->file) }}?size=720p" download><i class="fas fa-download"></i>Download 240</a><span class="duration"><i class="far fa-size"></i> 180 mb</span></li>
-                                                    </ul>
-                                                @else
+                                                <ul>
+    <li><a href="{{ asset('videos/' . $data->file) }}?size=720p" download><i class="fas fa-download"></i>Download 720p</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->file)) / 1048576, 2) }} MB</span></li>
+    <li><a href="{{ asset('videos/' . $data->second_file) }}?size=480p" download><i class="fas fa-download"></i>Download 480p</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->second_file)) / 1048576, 2) }} MB</span></li>
+    <li><a href="{{ asset('videos/' . $data->third_file) }}?size=360p" download><i class="fas fa-download"></i>Download 360p</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->third_file)) / 1048576, 2) }} MB</span></li>
+    <li><a href="{{ asset('videos/' . $data->fourth_file) }}?size=240" download><i class="fas fa-download"></i>Download 240</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->fourth_file)) / 1048576, 2) }} MB</span></li>
+</ul>                                         @else
                                                     <p>Please <a href="{{ route('login') }}">login</a> to download the videos.</p>
                                                 @endif
                                                 </div>
@@ -160,13 +201,7 @@
                    
                 </div>
             </section>
-            <!-- episode-area-end -->
 
-            <!-- tv-series-area -->
-         
-            <!-- tv-series-area-end -->
-
-            <!-- newsletter-area -->
             <section class="newsletter-area newsletter-bg" data-background="{{asset('assets/front/img/bg/newsletter_bg.jpg')}}">
                 <div class="container">
                     <div class="newsletter-inner-wrap">

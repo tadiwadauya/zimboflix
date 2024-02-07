@@ -18,6 +18,9 @@ return new class extends Migration
         $table->string('title')->unique();
         $table->string('cover_photo');
         $table->string('file');
+        $table->string('second_file')->nullable();
+        $table->string('third_file')->nullable();
+        $table->string('fourth_file')->nullable();
         $table->text('description')->nullable();
         $table->integer('views')->default(0);
         $table->integer('downloads')->default(0);
@@ -33,12 +36,12 @@ return new class extends Migration
         $table->string('episode')->nullable();
         $table->unsignedBigInteger('parent_id')->nullable();
         $table->timestamps();
-
+    
         $table->foreign('category_id')
             ->references('id')
             ->on('categories')
             ->onDelete('set null');
-
+    
         $table->foreign('parent_id')
             ->references('id')
             ->on('tvproductions')

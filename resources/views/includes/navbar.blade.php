@@ -40,13 +40,13 @@
                             <div class="menu-wrap">
                                 <nav class="menu-nav show">
                                     <div class="logo">
-                                        <a href="index.html">
+                                        <a href="{{ url('/')}}">
                                             <img src="{{asset('assets/front/img/logo/logo.png')}}" alt="Logo">
                                         </a>
                                     </div>
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
-                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="{{ url('/')}}">Home</a></li>
                                          <li><a href="movie.html">Movie</a></li>
                                             <li><a href="tv-show.html">Tv-show</a></li>
                                             <li><a href="tv-show.html">Genre</a></li>
