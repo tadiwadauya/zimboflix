@@ -10,25 +10,7 @@
         <main>
 <main>
 
-    <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{asset('assets/front/img/bg/breadcrumb_bg3.jpg')}}">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="breadcrumb-content">
-                        <h2 class="title">Our <span>Movies</span></h2>
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Movies</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- breadcrumb-area-end -->
+
 
     <!-- movie-area -->
 <section class="movie-area movie-bg" data-background="{{asset('assets/front/img/bg/movie_bg.jpg')}}">
@@ -38,7 +20,8 @@
             <div class="col-lg-6">
                 <div class="section-title text-center text-lg-left">
                     <span class="sub-title">ONLINE STREAMING</span>
-                    <h2 class="title">New Release Movies</h2>
+                    
+                    <h2 class="title">Your Search Results</h2>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -57,6 +40,8 @@
         </div>
         <!-- Displaying movie items with different types -->
         <div class="row tr-movie-active">
+        @if(count($all_tvproductions) > 0)
+        <ul>
         @foreach ($all_tvproductions as $item)
             <div class="col-xl-3 col-lg-4 col-sm-6 grid-item grid-sizer {{ $item->type}}">
                 <div class="movie-item movie-item-three mb-50">
@@ -84,25 +69,18 @@
                     </div>
                 </div>
             </div>
+</ul>
             @endforeach
+            @else
+        <h2>No search results found.</h2>
+    @endif
         </div>
     
         <div class="row">
     <div class="col-3">
         <div class="pagination-wrap mt-30">
             <nav>
-                <ul class="pagination pagination-sm justify-content-center">
-                    @if ($all_tvproductions->previousPageUrl())
-                        <li class="page-item">
-                            <a class="btn btn-primary" href="{{ $all_tvproductions->previousPageUrl() }}">Previous</a>
-                        </li>
-                    @endif
-                    @if ($all_tvproductions->nextPageUrl())
-                        <li class="page-item">
-                            <a class="btn btn-primary" href="{{ $all_tvproductions->nextPageUrl() }}">Next</a>
-                        </li>
-                    @endif
-                </ul>
+        
             </nav>
         </div>
     </div>

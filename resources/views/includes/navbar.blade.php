@@ -47,11 +47,11 @@
                                     <div class="navbar-wrap main-menu d-none d-lg-flex">
                                         <ul class="navigation">
                                             <li><a href="{{ url('/')}}">Home</a></li>
-                                         <li><a href="movie.html">Movie</a></li>
-                                            <li><a href="tv-show.html">Tv-show</a></li>
+                                         <li><a href="{{ url('movielist')}}">Movies</a></li>
+                                            <li><a href="{{ url('shows')}}">Tv-shows</a></li>
+                                            <li><a href="{{ url('skits')}}">Skits</a></li>
                                             <li><a href="tv-show.html">Genre</a></li>
                                             <li><a href="pricing.html">Trending</a></li>
-                                           <li><a href="contact.html">Latest</a></li>
                                            @guest
                                             @if (Route::has('login'))
                                             @endif
@@ -60,6 +60,16 @@
                                                 <ul class="submenu">
                                                     <li><a href="{{ url('/admin/home')}}">Dashboard</a></li>
                                                     <li><a href="blog-details.html">Profile</a></li>
+                                                    <li class=""> <a class="" role="tab"  href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"  class="btn">
+                                        {{ __('Logout') }}
+                                    </a></li>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+
                                                 </ul>
                                             </li>
                                             @endguest
@@ -69,9 +79,9 @@
                                         <ul>
                                             <li class="d-none d-xl-block">
                                                 <div class="footer-search">
-                                                    <form action="#">
-                                                        <input type="text" placeholder="Find Favorite Movie">
-                                                        <button><i class="fas fa-search"></i></button>
+                                                <form action="{{ route('tvproductions.search') }}" method="GET">
+                                                <input type="text" name="search" placeholder="Find Favorite Movie">
+                                                        <button type="submit"><i class="fas fa-search"></i></button>
                                                     </form>
                                                 </div>
                                             </li>

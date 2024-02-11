@@ -27,13 +27,13 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-6 order-0 order-lg-2">
                                     <div class="slider-img text-center text-lg-right" data-animation="fadeInRight" data-delay="1s">
-                                    <a href="{{ URL::to('tvproduction/' . $item->id) }}"> <img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt="" style="width: 420px;"></a>
+                                    <a href="{{ route('productionviews.increment', ['id' => $item->id]) }}"> <img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt="" style="width: 420px;"></a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="banner-content">
                                         <h6 class="sub-title" data-animation="fadeInUp" data-delay=".2s">Zimboflix</h6>
-                                        <h3 class="title" data-animation="fadeInUp" data-delay=".4s"><a href="{{ URL::to('tvproduction/' . $item->id) }}">{{ $item->title}} </a></h3>
+                                        <h3 class="title" data-animation="fadeInUp" data-delay=".4s"><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}">{{ $item->title}} </a></h3>
                                         <div class="banner-meta" data-animation="fadeInUp" data-delay=".6s">
                                             <ul>
                                                 <li class="quality">
@@ -101,7 +101,7 @@
                             @if ($item->category->name == 'Movie')
                                 <div class="movie-item movie-item-two mb-30">
                                     <div class="movie-poster">
-                                    <a href="{{ URL::to('tvproduction/' . $item->id) }}"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
+                                    <a href="{{ route('productionviews.increment', ['id' => $item->id]) }}"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
                                    </div>
                                     <div class="movie-content">
                                         <div class="rating">
@@ -111,7 +111,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </div>
-                                        <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}"> <td>{{ $item->title}}</td></a></h5>
+                                        <h5 class="title"><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}"> <td>{{ $item->title}}</td></a></h5>
                                         <span class="rel">{{ $item->type}}</span>
                                         <div class="movie-content-bottom">
                                               <ul>
@@ -134,7 +134,7 @@
                             @if ($item->category->name == 'Tv Show')
                                 <div class="movie-item movie-item-two mb-30">
                                     <div class="movie-poster">
-                                        <a href="{{ URL::to('tvproduction/' . $item->id) }}l"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
+                                        <a href="{{ route('productionviews.increment', ['id' => $item->id]) }}"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
                                     </div>
                                     <div class="movie-content">
                                         <div class="rating">
@@ -144,7 +144,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </div>
-                                        <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}l"> <td>{{ $item->title}}</td></a></h5>
+                                        <h5 class="title"><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}"> <td>{{ $item->title}}</td></a></h5>
                                         <span class="rel">{{ $item->type}}</span>
                                         <div class="movie-content-bottom">
                                             <ul>
@@ -169,7 +169,7 @@
                             @if ($item->category->name == 'skits')
                                 <div class="movie-item movie-item-two mb-30">
                                     <div class="movie-poster">
-                                    <a href="{{ URL::to('tvproduction/' . $item->id) }}"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
+                                    <a href="{{ route('productionviews.increment', ['id' => $item->id]) }}"><img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt=""></a>
                                      </div>
                                     <div class="movie-content">
                                         <div class="rating">
@@ -179,7 +179,7 @@
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
                                         </div>
-                                        <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}"> <td>{{ $item->title}}</td></a></h5>
+                                        <h5 class="title"><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}"> <td>{{ $item->title}}</td></a></h5>
                                         <span class="rel">{{ $item->type}}</span>
                                         <div class="movie-content-bottom">
                                          <ul>
@@ -231,7 +231,7 @@
                             <div class="movie-poster">
                                 <img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt="">
                                 <ul class="overlay-btn">
-                                    <li><a href="{{ URL::to('tvproduction/' . $item->id) }}" class=" btn">Watch Now</a></li>
+                                    <li><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}" class=" btn">Watch Now</a></li>
                                     <li><p class="description">{{ substr($item->description, 0, 105) }}{{ strlen($item->description) > 105 ? '...' : '' }}</p></li>
                                 </ul>
                             </div>
@@ -243,7 +243,7 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                 </div>
-                                <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}l">{{ $item->title}}</a></h5>
+                                <h5 class="title"><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}">{{ $item->title}}</a></h5>
                                 <span class="rel">{{ $item->type}}</span>
                                 <div class="movie-content-bottom">
                                     <ul>
@@ -286,7 +286,7 @@
                                 <div class="movie-poster">
                                     <img src="{{ asset('cover_photos/' .$item->cover_photo) }}" alt="">
                                     <ul class="overlay-btn">
-                                        <li><a href="{{ URL::to('tvproduction/' . $item->id) }}" class="btn">Watch Now</a></li>
+                                        <li><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}" class="btn">Watch Now</a></li>
                                         <li><p class="description">{{ substr($item->description, 0, 105) }}{{ strlen($item->description) > 105 ? '...' : '' }}</p></li>
                                </ul>
                                 </div>
@@ -298,7 +298,7 @@
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                     </div>
-                                    <h5 class="title"><a href="{{ URL::to('tvproduction/' . $item->id) }}">{{ $item->title}}</a></h5>
+                                    <h5 class="title"><a href="{{ route('productionviews.increment', ['id' => $item->id]) }}">{{ $item->title}}</a></h5>
                                     <span class="rel">{{ $item->type}}</span>
                                     <div class="movie-content-bottom">
                                         <ul>
@@ -319,7 +319,7 @@
                                 @endforeach
                     </div>
                     <div class="tr-movie-btn text-center mt-25">
-                        <a href="#" class="btn">BROWSE ALL MOVIES</a>
+                     <a href="{{ url('movielist')}}" class="btn">BROWSE ALL MOVIES</a>
                     </div>
                 </div>
             </section>

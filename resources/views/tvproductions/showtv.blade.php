@@ -105,9 +105,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="movie-details-btn">
-                            <a href="{{asset('assets/front/img/poster/movie_details_img.jpg')}}" class="download-btn" download="">Download <img src="fonts/download.svg" alt=""></a>
-                        </div>
+                        
                     </div>
                 </div>
             </section>
@@ -141,11 +139,35 @@
                                                 <div class="card-body">
                                                 @if(Auth::check())
                                                 <ul>
-    <li><a href="{{ asset('videos/' . $data->file) }}?size=720p" download><i class="fas fa-download"></i>Download 720p</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->file)) / 1048576, 2) }} MB</span></li>
-    <li><a href="{{ asset('videos/' . $data->second_file) }}?size=480p" download><i class="fas fa-download"></i>Download 480p</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->second_file)) / 1048576, 2) }} MB</span></li>
-    <li><a href="{{ asset('videos/' . $data->third_file) }}?size=360p" download><i class="fas fa-download"></i>Download 360p</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->third_file)) / 1048576, 2) }} MB</span></li>
-    <li><a href="{{ asset('videos/' . $data->fourth_file) }}?size=240" download><i class="fas fa-download"></i>Download 240</a><span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->fourth_file)) / 1048576, 2) }} MB</span></li>
-</ul>                                         @else
+                                        <li>
+                                           <form action="{{ route('productiondownloads.increment', ['id' => $data->id, 'download' => true]) }}" method="post">
+                                            @csrf
+                                            <button  class="quality fas fa-download" type="submit">Download 720p</button>
+                                           <span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->file)) / 1048576, 2) }} MB</span></form>
+                                        </li>
+
+                                        <li>
+                                           <form action="{{ route('productiondownloads2nd.increment', ['id' => $data->id, 'download' => true]) }}" method="post">
+                                            @csrf
+                                            <button  class="quality fas fa-download" type="submit">Download 480p</button>
+                                           <span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->second_file)) / 1048576, 2) }} MB</span></form>
+                                        </li>
+
+                                        <li>
+                                           <form action="{{ route('productiondownloads3rd.increment', ['id' => $data->id, 'download' => true]) }}" method="post">
+                                            @csrf
+                                            <button  class="quality fas fa-download" type="submit">Download 360p</button>
+                                           <span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->third_file)) / 1048576, 2) }} MB</span></form>
+                                        </li>
+
+                                        <li>
+                                           <form action="{{ route('productiondownloads4th.increment', ['id' => $data->id, 'download' => true]) }}" method="post">
+                                            @csrf
+                                            <button  class="quality fas fa-download" type="submit">Download 240p</button>
+                                           <span class="duration"><i class="far fa-size"></i> {{ round(filesize(public_path('videos/' . $data->fourth_file)) / 1048576, 2) }} MB</span></form>
+                                        </li>
+
+                                     </ul>      @else
                                                     <p>Please <a href="{{ route('login') }}">login</a> to download the videos.</p>
                                                 @endif
                                                 </div>

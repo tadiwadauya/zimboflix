@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Tvproduction;
 use App\Models\Category;
 use App\Models\Movietype;
+use Illuminate\Http\Response;
 
 class TvproductionController extends Controller
 {
@@ -27,6 +28,88 @@ class TvproductionController extends Controller
                                          
         return view('tvproductions.movies', compact('all_tvproductions'));
     }
+
+    public function shows()
+    {
+        $all_tvproductions = Tvproduction::whereHas('category', function($query) {
+                                             $query->where('name', '=', 'Tv Show');
+                                         })
+                                         ->paginate(16);
+                                         
+        return view('tvproductions.shows', compact('all_tvproductions'));
+    }
+
+    public function skits()
+    {
+        $all_tvproductions = Tvproduction::whereHas('category', function($query) {
+                                             $query->where('name', '=', 'skits');
+                                         })
+                                         ->paginate(16);
+                                         
+        return view('tvproductions.skits', compact('all_tvproductions'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+        $all_tvproductions = TVProduction::where('title', 'like', '%'.$query.'%')
+        ->orWhere('description', 'like', '%'.$query.'%')
+        ->get();
+    
+            return view('tvproductions.search', compact('all_tvproductions'));
+    }
+
+    public function incrementViews($id)
+    {
+        $tvProduction = TvProduction::findOrFail($id);
+        $tvProduction->views += 1;
+        $tvProduction->save();
+    
+        // Redirect to the desired page after incrementing views
+        return redirect('/tvproduction/' . $id);
+    }
+
+    public function incrementDownloads($id)
+{
+    $tvProduction = TvProduction::findOrFail($id);
+    $tvProduction->downloads += 1;
+    $tvProduction->save();
+
+    // Download the video file
+    $filePath = public_path('videos/' . $tvProduction->file);
+    return response()->download($filePath, 'video.mp4');
+}
+
+public function incrementDownloads2nd($id)
+{
+    $tvProduction = TvProduction::findOrFail($id);
+    $tvProduction->downloads += 1;
+    $tvProduction->save();
+
+    // Download the video file
+    $filePath = public_path('videos/' . $tvProduction->second_file);
+    return response()->download($filePath, 'video.mp4');
+}
+public function incrementDownloads3rd($id)
+{
+    $tvProduction = TvProduction::findOrFail($id);
+    $tvProduction->downloads += 1;
+    $tvProduction->save();
+
+    // Download the video file
+    $filePath = public_path('videos/' . $tvProduction->third_file);
+    return response()->download($filePath, 'video.mp4');
+}
+public function incrementDownloads4th($id)
+{
+    $tvProduction = TvProduction::findOrFail($id);
+    $tvProduction->downloads += 1;
+    $tvProduction->save();
+
+    // Download the video file
+    $filePath = public_path('videos/' . $tvProduction->fourth_file);
+    return response()->download($filePath, 'video.mp4');
+}
 
     public function create()
     {
@@ -314,8 +397,8 @@ public function saveFourthStage(Request $request, $id)
 
         return back()->with('success', 'TV production has been deleted successfully');  }
 
-    public function download($file){
-        return response()->download('documents/'.$file);
-    }
+    // public function download($file){
+    //     return response()->download('documents/'.$file);
+    // }
 
 }

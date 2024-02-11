@@ -9,17 +9,19 @@
             <div class="nk-wrap nk-wrap-nosidebar">
                 <!-- content @s -->
                 <div class="nk-content ">
+                <body class="img js-fullheight" style="background-image: url('{{asset('assets/front/img/banner/s_slider_bg.jpg')}}');">
                     <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
-                        <div class="brand-logo pb-4 text-center">
+                
+                        <div class="card card-bordered">
+                            <div class="card-inner card-inner-lg">
+                                <div class="nk-block-head">
+                                    <div class="nk-block-head-content">
+                                    <div class="brand-logo pb-4 text-center">
                             <a href="html/index.html" class="logo-link">
                                 <img class="logo-light logo-img logo-img-lg" src="{{asset('assets/admin/assets/images/logo.png')}}" srcset="{{asset('admin/assets/images/logo2x.png')}} 2x" alt="logo">
                                 <img class="logo-dark logo-img logo-img-lg" src="{{asset('assets/admin/assets/images/logo-dark.png')}}" srcset="{{asset('admin/assets/images/logo-dark.png')}} 2x" alt="logo-dark">
                             </a>
                         </div>
-                        <div class="card card-bordered">
-                            <div class="card-inner card-inner-lg">
-                                <div class="nk-block-head">
-                                    <div class="nk-block-head-content">
                                         <h4 class="nk-block-title">Sign-In</h4>
                                         <div class="nk-block-des">
                                             <p>Login using phonenumber and password</p>
@@ -83,6 +85,13 @@
                                     </a>
                                 @endif
                             </div>
+                            <br>
+                            <div class="row mb-3">
+                            <label for="" class="col-md-6 col-form-label text-md-end">New to Yedu TV?</label>  
+                            <div class="col-md-6">
+                                <a class="btn btn-default" href="{{ route('register') }}">Sign up now</a>
+                            </div>
+                            </div>
                         </div>
                     </form>
                     </div>
@@ -93,5 +102,5 @@
             </div>
         </div>
     </div>
-</div>
+</div></div>
 @endsection

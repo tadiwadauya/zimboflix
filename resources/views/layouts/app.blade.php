@@ -69,6 +69,23 @@
             @yield('content')
         </main>
 <!-- JS here -->
+<script>
+    function incrementDownloads(id) {
+        fetch('/increment-downloads/' + id)
+            .then(response => {
+                if (response.ok) {
+                    // Start the file download
+                    window.location.href = response.url;
+                } else {
+                    // Handle the error
+                    console.error('Failed to increment downloads');
+                }
+            })
+            .catch(error => {
+                console.error('Failed to increment downloads', error);
+            });
+    }
+</script>
         <script src="{{asset('assets/front/js/vendor/jquery-3.6.0.min.js')}}"></script>
         <script src="{{asset('assets/front/js/popper.min.js')}}"></script>
         <script src="{{asset('assets/front/js/bootstrap.min.js')}}"></script>

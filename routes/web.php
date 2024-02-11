@@ -38,10 +38,23 @@ Route::get('/movietypes/create', 'App\Http\Controllers\MovietypeController@creat
 Route::get('/movietypes', 'App\Http\Controllers\MovietypeController@movietypes')->name('movietypes');
 Route::post('/movietypes', 'App\Http\Controllers\MovietypeController@store')->name('movietypes.store');
 
+//views
+Route::get('productionviews/{id}', 'App\Http\Controllers\TvProductionController@incrementViews')->name('productionviews.increment');
 
+//downloads
+// Route::get('productiondownloads/{id}/download', 'App\Http\Controllers\TvProductionController@incrementDownloads')->name('productiondownloads.download');
+Route::post('productiondownloads/{id}/{download?}', 'App\Http\Controllers\TvProductionController@incrementDownloads')->name('productiondownloads.increment');
+Route::post('productiondownloads2nd/{id}/{download?}', 'App\Http\Controllers\TvProductionController@incrementDownloads2nd')->name('productiondownloads2nd.increment');
+Route::post('productiondownloads3rd/{id}/{download?}', 'App\Http\Controllers\TvProductionController@incrementDownloads3rd')->name('productiondownloads3rd.increment');
+Route::post('productiondownloads4th/{id}/{download?}', 'App\Http\Controllers\TvProductionController@incrementDownloads4th')->name('productiondownloads4th.increment');
+// Route::get('/increment-downloads/{id}', 'TvProductionController@incrementDownloads')->name('increment-downloads');
+// Route::get('/download/{id}/{size}', 'TvProductionController@download')->name('download');
 //tvproduction routes
 
 Route::get('movielist', 'App\Http\Controllers\TvproductionController@movies')->name('movies');
+Route::get('shows', 'App\Http\Controllers\TvproductionController@shows')->name('shows');
+Route::get('skits', 'App\Http\Controllers\TvproductionController@skits')->name('skits');
+Route::get('/tvproductions/search', 'App\Http\Controllers\TVProductionController@search')->name('tvproductions.search');
 Route::get('my-tvproductions', 'App\Http\Controllers\TvproductionController@myTvproductions')->name('my.tvproductionS');
 Route::get('show-tvproductionS/', 'App\Http\Controllers\TvproductionController@showtvproductions');
 Route::get('show-all-tvproductions', 'App\Http\Controllers\TvproductionController@ShowingAllTvproductions');

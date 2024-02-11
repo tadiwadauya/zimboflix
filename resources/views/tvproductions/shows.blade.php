@@ -11,16 +11,16 @@
 <main>
 
     <!-- breadcrumb-area -->
-    <section class="breadcrumb-area breadcrumb-bg" data-background="{{asset('assets/front/img/bg/breadcrumb_bg3.jpg')}}">
+    <section class="breadcrumb-area breadcrumb-bg" data-background="{{asset('assets/front/img/bg/breadcrumb_bg1.jpg')}}">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb-content">
-                        <h2 class="title">Our <span>Movies</span></h2>
+                        <h2 class="title">Our <span>Tv Shows</span></h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Movies</li>
+                                <li class="breadcrumb-item"><a href="{{ url('/')}}">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Tv Shows</li>
                             </ol>
                         </nav>
                     </div>
@@ -51,7 +51,7 @@
     @endforeach
 </div>
                     <!-- Displaying movie filter form -->
-               
+                
                 </div>
             </div>
         </div>
