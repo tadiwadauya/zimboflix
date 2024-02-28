@@ -22,6 +22,11 @@
                             </a>
                         </div>
                                         <h4 class="nk-block-title">Register</h4>
+                                        @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
                                         <div class="nk-block-des">
                                             <p>Fill in the form to become a member and download for free</p>
                                         </div>

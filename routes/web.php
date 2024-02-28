@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\MovietypeController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,8 @@ use App\Http\Controllers\MovietypeController;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
 
 Auth::routes();
+
+Route::resource('users', UserController::class);
 
 Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -74,6 +77,7 @@ Route::get('/tv-production/{id}/second-stage', 'App\Http\Controllers\TVProductio
 Route::post('/tv-production/{id}/save-second-stage', 'App\Http\Controllers\TVProductionController@saveSecondStage')->name('save_second_stage');
 
 Route::get('/tv-production/{id}/third-stage', 'App\Http\Controllers\TVProductionController@thirdStage')->name('third_stage');
+
 Route::post('/tv-production/{id}/save-third-stage', 'App\Http\Controllers\TVProductionController@saveThirdStage')->name('save_third_stage');
 
 Route::get('/tv-production/{id}/fourth-stage', 'App\Http\Controllers\TVProductionController@fourthStage')->name('fourth_stage');
