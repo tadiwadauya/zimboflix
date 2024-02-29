@@ -57,7 +57,7 @@ class UserController extends Controller
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'is_admin' => ['required', 'boolean'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
     
         $input = $request->all();
@@ -102,33 +102,33 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'phonenumber' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
-            'age' => ['required', 'integer'],
-            'gender' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
-            'is_admin' => ['required', 'boolean'],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-        ]);
-    
-        $user = User::findOrFail($id);
-        $input = $request->all();
-    
-        if ($request->has('password')) {
-            $input['password'] = Hash::make($input['password']);
-        } else {
-            unset($input['password']);
-        }
-    
-        $user->update($input);
-    
-        return redirect()->route('users.index')
-                        ->with('success', 'User updated successfully');
+{
+    $validatedData = $request->validate([
+        'first_name' => ['required', 'string', 'max:255'],
+        'last_name' => ['required', 'string', 'max:255'],
+        'phonenumber' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($id)],
+        'age' => ['required', 'integer'],
+        'gender' => ['required', 'string', 'max:255'],
+        'country' => ['required', 'string', 'max:255'],
+        'city' => ['required', 'string', 'max:255'],
+        'is_admin' => ['required', 'boolean'],
+        'password' => ['nullable', 'string', 'min:8'],
+    ]);
+
+    $user = User::findOrFail($id);
+    $input = $request->all();
+
+    if ($request->filled('password')) {
+        $input['password'] = Hash::make($input['password']);
+    } else {
+        unset($input['password']);
     }
+
+    $user->update($input);
+
+    return redirect()->route('users.index')
+                    ->with('success', 'User updated successfully');
+}
 
     /**
      * Remove the specified resource from storage.

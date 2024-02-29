@@ -122,6 +122,18 @@ $(document).ready(function() {
         }
     }
 </script>
+<script>
+    const changePasswordCheckbox = document.getElementById('changePasswordCheckbox');
+    const passwordField = document.getElementById('passwordField');
+
+    changePasswordCheckbox.addEventListener('change', function() {
+        if (changePasswordCheckbox.checked) {
+            passwordField.style.display = 'block';
+        } else {
+            passwordField.style.display = 'none';
+        }
+    });
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="{{asset('assets/admin/assets/js/bundle.js')}}"></script>
